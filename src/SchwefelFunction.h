@@ -18,7 +18,7 @@ private:
 
 public:
 	SchwefelFunction();
-	double EvaluateFunction(std::vector<double>&);
+	double EvaluateFunction(const std::vector<double>&);
 	double getVal();
 	virtual ~SchwefelFunction();
 };

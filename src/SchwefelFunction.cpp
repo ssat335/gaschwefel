@@ -12,12 +12,11 @@
 #include <math.h>
 
 SchwefelFunction::SchwefelFunction() {
-	// TODO Auto-generated constructor stub
 	m_result = 0.0;
 
 }
 
-double SchwefelFunction::EvaluateFunction(std::vector<double>& parameters) {
+double SchwefelFunction::EvaluateFunction(const std::vector<double>& parameters) {
 	int d = parameters.size();
 	assert(d > 0);
 
