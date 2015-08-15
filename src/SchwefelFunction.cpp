@@ -19,10 +19,10 @@ SchwefelFunction::SchwefelFunction() {
 double SchwefelFunction::EvaluateFunction(const std::vector<double>& parameters) {
 	int d = parameters.size();
 	assert(d > 0);
-
+	m_result = 0.0;
 	//Usually evaluated on the hypercube xi ∈ [-500, 500], for all i = 1, …, d.
 	for(int i = 0; i < d; i++) {
-		double xi = parameters[i];
+		double xi = parameters[i] - 500;
 		m_result += (-xi) * sin(sqrt(fabs(xi)));
 	}
 	m_result = 418.9829 * d + m_result;

@@ -13,12 +13,12 @@
 
 Population::Population() {
 	m_isExisting = false;
-	m_Population.empty();
+	m_Population.clear();
 }
 
 Population::Population(int pop_size, int individual_size) {
-	assert(pop_size > 0 || individual_size > 0);
-	m_Population.empty();
+	assert(pop_size > 0 || individual_size > 0 || m_Population.size() == 0);
+	m_Population.clear();
 	for (int i = 0; i < pop_size; i++)
 	{
 		Individual individual(individual_size, 1000, 0);
@@ -53,14 +53,10 @@ int Population::getHighestFitIndex() {
 }
 
 void Population::setIndividual(int index, Individual individual) {
-	assert(index < 0 || index >= m_Population.size());
+	assert(index >= 0 || index >= m_Population.size());
 	m_Population[index] = individual;
 }
 
 Population::~Population() {
-	for (int i = 0; i < m_Population.size(); i++)
-	{
-		delete &m_Population[i];
-	}
 }
 

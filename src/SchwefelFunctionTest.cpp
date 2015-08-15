@@ -14,11 +14,25 @@ SchwefelFunctionTest::SchwefelFunctionTest() {
 
 	SchwefelFunction testFunction;
 	std::vector<double> vals;
-	vals.push_back(420);
-	vals.push_back(20);
-	double val = testFunction.EvaluateFunction(vals);
-	std::cout << "Inside test val " << val << std::endl;
-	ASSERT_EQUAL_DELTA(438.5268, val, 0.01);
+	double minimum = 100;
+	double x1 = 0;
+	double x2 = 0;
+	for(int i = 0; i< 1000; i++) {
+		for( int j= 0; j < 1000; j++) {
+			vals.push_back(i);
+			vals.push_back(j);
+			double val = testFunction.EvaluateFunction(vals);
+			if (val < minimum) {
+				minimum = val;
+				x1 = i;
+				x2 = j;
+			}
+			vals.clear();
+		}
+	}
+	ASSERT_EQUAL_DELTA(921, x1 , 0.01);
+	ASSERT_EQUAL_DELTA(921, x2 , 0.01);
+	ASSERT_EQUAL_DELTA(0.000271968, minimum , 0.0001);
 }
 
 void SchwefelFunctionTest::operator() () {

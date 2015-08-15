@@ -16,8 +16,8 @@ private:
 	int m_dimension;
 	std::vector<double> m_vIndividual;
 	double m_fitness;
-	int m_ValRangeMax;
-	int m_ValRangeMin;
+	double m_ValRangeMax;
+	double m_ValRangeMin;
 
 public:
 	Individual();
@@ -29,6 +29,7 @@ public:
 	double getFitnessOfIndividual();
 	Individual generateCrossOver(Individual individual, int crossover);
 	Individual mutate(int mutateParameter);
+	void print();
 	virtual ~Individual();
 };
 
