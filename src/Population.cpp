@@ -10,6 +10,7 @@
 #include "SchwefelFunction.h"
 
 #include <assert.h>
+#include <iostream>
 
 Population::Population() {
 	m_isExisting = false;
@@ -55,6 +56,17 @@ int Population::getHighestFitIndex() {
 void Population::setIndividual(int index, Individual individual) {
 	assert(index >= 0 || index >= m_Population.size());
 	m_Population[index] = individual;
+}
+
+void Population::print() {
+	std::cout << "--------------------------------------------------"<< std::endl;
+	int size = m_Population.size();
+	std::cout << "Population Size: " << size << std::endl;
+	for (int i = 0; i < size; i++) {
+		Individual myIndi = m_Population[i];
+		myIndi.print();
+	}
+	std::cout << std::endl << "--------------------------------------------------" << std::endl;
 }
 
 Population::~Population() {

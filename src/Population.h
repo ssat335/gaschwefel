@@ -24,6 +24,7 @@ public:
 	Individual getHighestFitIndividual();
 	int getHighestFitIndex();
 	void setIndividual(int index, Individual individual);
+	void print();
 	virtual ~Population();
 };
 

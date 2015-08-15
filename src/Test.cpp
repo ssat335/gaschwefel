@@ -7,8 +7,8 @@
 
 void runSuite(){
 	cute::suite s;
-	s.push_back(SchwefelFunctionTest());
-	s.push_back(IndividualTest());
+	//s.push_back(SchwefelFunctionTest());
+	//s.push_back(IndividualTest());
 	s.push_back(GATest());
 	cute::ide_listener lis;
 	cute::makeRunner(lis)(s, "The Suite");

@@ -32,6 +32,9 @@ void GA::Run() {
 	assert(m_tempPopSize > 0);
 	int highestFitIndex = m_pPopulation->getHighestFitIndex();
 	while(m_pPopulation->getHighestFitIndividual().getFitnessOfIndividual() > 1e-3) {
+	//while(m_genCount < 10000) {
+		std::cout << " Before Cross Over Except of Index: " << highestFitIndex << std::endl;
+		m_pPopulation->print();
 		m_genCount ++;
 		std::cout << "Generation Count is " << m_genCount << std::endl;
 		for (int i = 0; i < m_PopulationSize; i++) {
@@ -46,7 +49,11 @@ void GA::Run() {
 				delete pTempPopulation2;
 			}
 		}
+		std::cout << " Before mutation " << std::endl;
+		m_pPopulation->print();
 		Mutate();
+		std::cout << " After mutation " << std::endl;
+		m_pPopulation->print();
 	}
 }
 

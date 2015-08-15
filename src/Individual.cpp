@@ -76,8 +76,13 @@ Individual Individual::generateCrossOver(Individual individual, int crossoverpoi
 Individual Individual::mutate(int mutateParameter) {
 	assert(mutateParameter < m_dimension);
 	for(int i =0; i < m_dimension; i++) {
-		if( i >= mutateParameter)
-			m_vIndividual[i] += pow((-1),round((double)rand())) * 10 * (double)rand() / (double)RAND_MAX;
+		if( i >= mutateParameter) {
+			int temp = m_vIndividual[i];
+			while ( (temp + m_vIndividual[i]) > m_ValRangeMax || (temp + m_vIndividual[i]) < m_ValRangeMin) {
+				temp = pow((-1),round((double)rand())) * 10 * (double)rand() / (double)RAND_MAX;
+			}
+			m_vIndividual[i]+=temp;
+		}
 	}
 	return *this;
 }
