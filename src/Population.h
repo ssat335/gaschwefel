@@ -15,6 +15,11 @@
 class Population {
 	std::vector<Individual> m_Population;
 	bool m_isExisting;
+	std::vector<double> m_IndividualFitness;
+	double m_totalFitness;
+	std::vector<double> m_ProbablityOfIndividual;
+	std::vector<double> m_CumulativeProbability;
+
 
 public:
 	Population();
@@ -23,6 +28,10 @@ public:
 	int getPopulationSize();
 	Individual getHighestFitIndividual();
 	int getHighestFitIndex();
+	std::vector<double> getNormalisedFitnessVector();
+	double getTotalFitnessPopulation();
+	std::vector<double> getProbabilityVector();
+	std::vector<double> getCumulativeProbailityEachIndividual();
 	void setIndividual(int index, Individual individual);
 	void print();
 	virtual ~Population();

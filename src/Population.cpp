@@ -11,6 +11,8 @@
 
 #include <assert.h>
 #include <iostream>
+#include <cmath>
+#include "Debug.h"
 
 Population::Population() {
 	m_isExisting = false;
@@ -51,6 +53,53 @@ int Population::getHighestFitIndex() {
 		}
 	}
 	return fittestIndex;
+}
+
+std::vector<double> Population::getNormalisedFitnessVector() {
+
+	return m_IndividualFitness;
+}
+
+double Population::getTotalFitnessPopulation() {
+
+	return m_totalFitness;
+}
+
+std::vector<double> Population::getProbabilityVector() {
+	return m_ProbablityOfIndividual;
+}
+
+std::vector<double> Population::getCumulativeProbailityEachIndividual() {
+
+	m_IndividualFitness.clear();
+	for (int i = 0; i < m_Population.size(); i++) {
+		m_IndividualFitness.push_back(1/(getIndividual(i).getFitnessOfIndividual() + 1));
+	}
+	PRINT_VECTOR(m_IndividualFitness);
+
+	assert(m_IndividualFitness.size() == m_Population.size());
+	m_totalFitness = 0;
+	for (int i = 0; i < m_Population.size(); i++) {
+		m_totalFitness += m_IndividualFitness[i];
+	}
+	PRINT_VARIABLE(m_totalFitness);
+
+	m_ProbablityOfIndividual.clear();
+	for (int i = 0; i < m_Population.size(); i++) {
+		m_ProbablityOfIndividual.push_back(m_IndividualFitness[i]/m_totalFitness);
+	}
+	PRINT_VECTOR(m_ProbablityOfIndividual);
+
+	m_CumulativeProbability.clear();
+	m_CumulativeProbability.push_back(m_ProbablityOfIndividual[0]);
+	for (int i = 1; i < m_Population.size(); i++) {
+		m_CumulativeProbability.push_back(m_CumulativeProbability[i-1] + m_ProbablityOfIndividual[i]);
+		assert(m_CumulativeProbability[i] >= 0 && m_CumulativeProbability[i] <= 1.001);
+	}
+	PRINT_VECTOR(m_CumulativeProbability);
+
+	assert(m_ProbablityOfIndividual.size() == m_Population.size());
+	return m_CumulativeProbability;
 }
 
 void Population::setIndividual(int index, Individual individual) {
