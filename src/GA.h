@@ -24,8 +24,8 @@ private:
 	int m_IndividualSize;
 
 public:
-	GA();
-	void Initialise(int populationSize);
+	GA(int populationSize);
+	void Initialise();
 	void Run();
 	void SelectPopulation();
 	void CrossOverIndividuals();

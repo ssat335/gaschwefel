@@ -14,11 +14,6 @@
 #include <cmath>
 #include "Debug.h"
 
-Population::Population() {
-	m_isExisting = false;
-	m_Population.clear();
-}
-
 Population::Population(int pop_size, int individual_size) {
 	assert(pop_size > 0 || individual_size > 0 || m_Population.size() == 0);
 	m_Population.clear();

@@ -14,7 +14,7 @@
 #include "Debug.h"
 
 
-GA::GA() {
+GA::GA(int populationSize) {
 	// TODO Auto-generated constructor stub
 	m_genCount = 0;
 	m_tempPopSize = 5;
@@ -23,20 +23,13 @@ GA::GA() {
 	m_crossOverPercentage = 0.5; // 0.25 equivalent
 	m_mutatePercentage = 0.5;
 	m_IndividualSize = 2;
-	m_PopulationSize = 5;
-	m_pPopulation = 0;
+	m_PopulationSize = populationSize;
+	Initialise();
 
 }
 
-void GA::Initialise(int populationSize) {
-	m_genCount = 0;
-	m_tempPopSize = 5;
-	m_crossOverVal = 1;
-	m_mutatePar = 0;
-	m_crossOverPercentage = 0.5; // 0.25 equivalent
-	m_mutatePercentage = 0.5;
-	m_IndividualSize = 2;
-	m_PopulationSize = 5;
+void GA::Initialise() {
+	assert(m_PopulationSize > 0);
 	m_pPopulation = new Population(m_PopulationSize, m_IndividualSize);
 	assert(m_pPopulation != 0);
 }
@@ -44,8 +37,8 @@ void GA::Initialise(int populationSize) {
 void GA::Run() {
 	assert(m_tempPopSize > 0);
 	int highestFitIndex = m_pPopulation->getHighestFitIndex();
-	while(m_pPopulation->getHighestFitIndividual().getFitnessOfIndividual() > 0.01) {
-		TRACE(" Before selection: ");
+	while(m_pPopulation->getHighestFitIndividual().getFitnessOfIndividual() > 0.001) {
+		TRACE("Before selection: ");
 		m_pPopulation->print();
 		m_genCount ++;
 		std::cout << "Generation Count is " << m_genCount << std::endl;

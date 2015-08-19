@@ -13,14 +13,6 @@
 #include <cmath>
 #include "Debug.h"
 
-Individual::Individual() {
-	m_dimension = 0;
-	m_fitness = 0;
-	m_vIndividual.clear();
-	m_ValRangeMax = 1000;
-	m_ValRangeMin = 0;
-}
-
 Individual::Individual(int dimension, int maxVal, int minVal) {
 	m_dimension = dimension;
 	m_ValRangeMax = maxVal;

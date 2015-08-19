@@ -22,7 +22,6 @@ class Population {
 
 
 public:
-	Population();
 	Population(int pop_size, int individual_size);
 	Individual getIndividual(int index);
 	int getPopulationSize();

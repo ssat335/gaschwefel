@@ -20,7 +20,7 @@ private:
 	double m_ValRangeMin;
 
 public:
-	Individual();
+
 	Individual(int dimension, int maxVal, int minVal);
 	void createRandomIndividual();
 	double getAValInIndividual(int index);
