@@ -9,7 +9,7 @@
 #include "GA.h"
 
 GATest::GATest() {
-	GA* m_pmyGA = new GA(50);
+	GA* m_pmyGA = new GA(1000);
 	m_pmyGA->Run();
 }
 

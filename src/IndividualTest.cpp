@@ -21,7 +21,7 @@ IndividualTest::IndividualTest() {
 	Individual myIndividual(2, 1000, 0);
 	myIndividual.print();
 	for (int i = 0; i < 2; i++ ) {
-		myIndividual.mutate(i);
+		myIndividual.mutate(i, 100);
 		myIndividual.print();
 		assert(myIndividual.getFitnessOfIndividual() > 0);
 	}

@@ -34,13 +34,13 @@ void Individual::createRandomIndividual() {
 
 double Individual::getAValInIndividual(int index) {
 	assert(m_dimension > 0);
-	assert(index < m_vIndividual.size());
+	assert((unsigned int) index < m_vIndividual.size());
 	return m_vIndividual[index];
 }
 
 void Individual::setAValInIndividula(double val, int index) {
 	assert(m_dimension > 0);
-	assert(index < m_vIndividual.size());
+	assert((unsigned int) index < m_vIndividual.size());
 	m_vIndividual[index] = val;
 }
 
@@ -57,22 +57,27 @@ double Individual::getFitnessOfIndividual() {
 	return m_fitness;
 }
 
-Individual Individual::generateCrossOver(Individual individual, int crossoverpoint) {
+Individual Individual::generateCrossOver(Individual& individual, int crossoverpoint) {
 	assert(crossoverpoint < m_dimension);
+	Individual temp = individual;
 	for(int i =0; i < m_dimension; i++) {
-		if( i >= crossoverpoint)
-			m_vIndividual[i] = (m_vIndividual[i] + individual.getAValInIndividual(i))/2;
+		if( i >= crossoverpoint) {
+			individual.setAValInIndividula(m_vIndividual[i], i);
+			m_vIndividual[i] = temp.getAValInIndividual(i);
+		}
 	}
 	return *this;
 }
 
-Individual Individual::mutate(int mutateParameter) {
-	assert(mutateParameter < m_dimension);
+Individual Individual::mutate(double mutatePercentage, double range) {
+	assert(mutatePercentage > 0 && range > 0);
+	double random = 0;
 	for(int i =0; i < m_dimension; i++) {
-		if( i >= mutateParameter) {
-			double temp = pow((-1),round((double)rand())) * 100 * (double)rand() / (double)RAND_MAX;
+		random = (double) rand() / (RAND_MAX);
+		if(random < mutatePercentage) {
+			double temp = pow((-1),round((double)rand())) * range * (double)rand() / (double)RAND_MAX;
 			while ((temp + m_vIndividual[i]) > m_ValRangeMax || (temp + m_vIndividual[i]) < m_ValRangeMin) {
-				temp = pow((-1),round((double)rand())) * 100 * (double)rand() / (double)RAND_MAX;
+				temp = pow((-1),round((double)rand())) * range * (double)rand() / (double)RAND_MAX;
 			}
 			m_vIndividual[i]+=temp;
 		}
@@ -82,7 +87,7 @@ Individual Individual::mutate(int mutateParameter) {
 
 void Individual::print(){
 	for(int i =0; i < m_dimension; i++) {
-		std::cout << "Value[" << i << "]" << m_vIndividual[i] << " | ";
+		std::cout << "[" << i << "] " << m_vIndividual[i] << "\t| ";
  	}
 	std::cout << std::endl;
 }

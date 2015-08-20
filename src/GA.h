@@ -22,6 +22,7 @@ private:
 	double m_crossOverPercentage; // 0.25 equivalent
 	double m_mutatePercentage;
 	int m_IndividualSize;
+	double m_mutateRange;
 
 public:
 	GA(int populationSize);

@@ -27,8 +27,8 @@ public:
 	void setAValInIndividula(double val, int index);
 	int getIndividualDimension();
 	double getFitnessOfIndividual();
-	Individual generateCrossOver(Individual individual, int crossover);
-	Individual mutate(int mutateParameter);
+	Individual generateCrossOver(Individual& individual, int crossover);
+	Individual mutate(double mutateParameter,  double range);
 	void print();
 	virtual ~Individual();
 };
