@@ -18,8 +18,8 @@ GA::GA(int populationSize) {
 	// TODO Auto-generated constructor stub
 	m_genCount = 0;
 	m_tempPopSize = 5;
-	m_crossOverPercentage = 0.5; // 0.25 equivalent
-	m_mutatePercentage = 0.5;
+	m_crossOverPercentage = 0.5;
+	m_mutatePercentage = 0.25;
 	m_IndividualSize = 2;
 	m_PopulationSize = populationSize;
 	m_crossOverVal = 1;
@@ -30,7 +30,6 @@ GA::GA(int populationSize) {
 
 void GA::Initialise() {
 	assert(m_PopulationSize > 0);
-	srand(time(NULL));
 	m_pPopulation = new Population(m_PopulationSize, m_IndividualSize);
 	assert(m_pPopulation != 0);
 }
@@ -38,25 +37,25 @@ void GA::Initialise() {
 void GA::Run() {
 	assert(m_tempPopSize > 0);
 	while(m_pPopulation->getHighestFitIndividual().getFitnessOfIndividual() > 1e-4) {
-	//while(m_genCount < 1) {
+	//while(m_genCount < 20) {
 
-		TRACE("Initial Population: ");
-		m_pPopulation->print();
+		//TRACE("Initial Population: ");
+		//m_pPopulation->print();
 
 		m_genCount ++;
-		PRINT_VARIABLE(m_genCount);
+		//PRINT_VARIABLE(m_genCount);
 
 		SelectPopulation();
-		TRACE("Selected Population");
-		m_pPopulation->print();
+		//TRACE("Selected Population");
+		//m_pPopulation->print();
 
 		CrossOverIndividuals();
-		TRACE(" After cross over and before mutation ");
-		m_pPopulation->print();
+		//TRACE(" After cross over and before mutation ");
+		//m_pPopulation->print();
 
 		Mutate();
-		TRACE(" After mutation ");
-		m_pPopulation->print();
+		//TRACE(" After mutation ");
+		//m_pPopulation->print();
 
 		PRINT_VARIABLE(m_pPopulation->getHighestFitIndividual().getFitnessOfIndividual());
 	}

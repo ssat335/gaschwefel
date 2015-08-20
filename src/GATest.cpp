@@ -7,8 +7,14 @@
 
 #include "GATest.h"
 #include "GA.h"
+#include <cstdlib>
+#include <time.h>
+#include "Debug.h"
 
 GATest::GATest() {
+	unsigned int seed = time(NULL);
+	PRINT_VARIABLE(seed);
+	srand(seed);
 	GA* m_pmyGA = new GA(1000);
 	m_pmyGA->Run();
 }
